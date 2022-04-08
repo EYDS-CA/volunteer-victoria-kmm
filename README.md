@@ -1,7 +1,7 @@
 # Volunteer Victoria Canada App
 Developed in Kotlin Multiplatform Mobile with MVVM, Redux and Clean Architecture. Using SwiftUI and Jetpack Compose.
 
-# Requeriments to Run for android
+# Requeriments to Run
 
 1. Android SDK and the latest stable Android Studio(4.1.3) or IntelliJ(2021.1+)
 2. Updated versions of Kotlin Multiplatform Mobile and Intellij Kotlin plugin with 1.4.3x support (should be included in the latest Android Studio or IDEA)
