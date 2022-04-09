@@ -1,16 +1,34 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization")
+    id("kotlinx-serialization")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
-version = "1.0"
+version = "1.2"
 
 kotlin {
     android()
-    iosX64()
-    iosArm64()
+
+    val iosTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget =
+        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
+            ::iosArm64
+        else
+            ::iosX64
+
+    iosTarget("ios") {}
+
     iosSimulatorArm64()
+
+    targets.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().forEach{
+        it.binaries.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.Framework>()
+            .forEach { lib ->
+                lib.isStatic = false
+                lib.linkerOpts.add("-lsqlite3")
+            }
+    }
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -21,40 +39,59 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
+    val ktorVersion = "1.6.8"
+    val coroutinesVersion = "1.6.1-native-mt"
+    val serializationVersion = "1.3.2"
+    val sqlDelightVersion = "1.5.3"
+
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+
+        /** Common Modules    */
+
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
             }
         }
-        val androidMain by getting
-        val androidTest by getting {
+
+        /** Android Modules    */
+
+        val androidMain by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
+
+        /** iOS Modules */
+
+        val iosMain by getting {
             dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+            }
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
+    }
+}
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.fw.vvc"
+        sourceFolders = listOf("sqldelight")
+        dialect = "sqlite:3.24"
     }
 }
 
