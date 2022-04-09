@@ -1,0 +1,17 @@
+--- DATABASE SCHEMAS ---
+
+--- BEGIN USER SESSION SCHEMA (prototype)
+
+CREATE TABLE UserSession (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT
+);
+
+insertUserSession: INSERT INTO UserSession(id, name, type) VALUES(?, ?, ?);
+
+removeUserSession: DELETE FROM UserSession;
+
+selectUserSession: SELECT * FROM UserSession;
+
+--- END USER SCHEMA
