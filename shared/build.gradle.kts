@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -12,7 +14,7 @@ version = "1.2"
 kotlin {
     android()
 
-    val iosTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget =
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
             ::iosArm64
         else
@@ -22,7 +24,7 @@ kotlin {
 
     iosSimulatorArm64()
 
-    targets.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().forEach{
+    targets.filterIsInstance<KotlinNativeTarget>().forEach{
         it.binaries.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.Framework>()
             .forEach { lib ->
                 lib.isStatic = false
