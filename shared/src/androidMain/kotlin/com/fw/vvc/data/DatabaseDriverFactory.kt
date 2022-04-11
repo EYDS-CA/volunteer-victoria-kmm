@@ -1,4 +1,4 @@
-package com.fw.vvc.data.cache
+package com.fw.vvc.data
 
 import android.content.Context
 import com.fw.vvc.AppDatabase

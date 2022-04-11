@@ -4,11 +4,12 @@
 
 CREATE TABLE UserSession (
     id TEXT NOT NULL PRIMARY KEY,
-    name TEXT NOT NULL,
-    type TEXT
+    fbId TEXT NOT NULL,
+    avatar TEXT NOT NULL,
+    name TEXT
 );
 
-insertUserSession: INSERT INTO UserSession(id, name, type) VALUES(?, ?, ?);
+insertUserSession: INSERT INTO UserSession(id, fbId, avatar, name) VALUES(?, ?, ?, ?);
 
 removeUserSession: DELETE FROM UserSession;
 
