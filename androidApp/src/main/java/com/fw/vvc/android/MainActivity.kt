@@ -2,19 +2,20 @@ package com.fw.vvc.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.fw.vvc.Greeting
-import android.widget.TextView
+import androidx.activity.compose.setContent
+import androidx.core.view.WindowCompat
+import com.fw.vvc.android.ui.VolunteerVCAppUI
+import dagger.hilt.android.AndroidEntryPoint
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        setContent {
+            VolunteerVCAppUI()
+        }
     }
 }

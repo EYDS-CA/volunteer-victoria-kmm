@@ -1,6 +1,6 @@
 package com.fw.vvc.util
 
 actual class BuildConfig {
-    actual fun isDebug() = BuildConfig.DEBUG
+    actual fun isDebug() = true
     actual fun isAndroid() = true
 }

@@ -1,4 +1,4 @@
-package com.fw.vvc.data.cache
+package com.fw.vvc.data
 
 import com.fw.vvc.AppDatabase
 import com.squareup.sqldelight.db.SqlDriver
