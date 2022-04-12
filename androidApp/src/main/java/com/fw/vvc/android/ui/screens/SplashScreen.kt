@@ -61,7 +61,7 @@ private fun AnimationSplashContent(
         animation.animateTo(
             targetValue = 1F,
             animationSpec = tween(
-                durationMillis = 3000,
+                durationMillis = 1500,
                 easing = {
                     OvershootInterpolator(3F).getInterpolation(it)
                 }
@@ -70,7 +70,7 @@ private fun AnimationSplashContent(
 
         if (viewModel.isSessionActive.value == true) {
             Toast.makeText(context, "Welcome", Toast.LENGTH_LONG).show()
-            navigationActions.navigateToLogin.invoke()
+            navigationActions.navigateToHome.invoke()
         } else {
             navigationActions.navigateToLogin.invoke()
         }
