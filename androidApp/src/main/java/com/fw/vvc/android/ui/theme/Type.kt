@@ -10,24 +10,25 @@ import com.fw.vvc.android.R
 
 private val Montserrat = FontFamily(
     Font(R.font.montserrat_regular),
-    Font(R.font.montserrat_medium, FontWeight.W500),
-    Font(R.font.montserrat_semibold, FontWeight.W600)
+    Font(R.font.montserrat_medium, FontWeight.Medium),
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold),
+    Font(R.font.montserrat_bold, FontWeight.Bold)
 )
 
 val Typography = Typography(
     defaultFontFamily = Montserrat,
     h4 = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
         letterSpacing = 0.sp
     ),
     h5 = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
         letterSpacing = 0.sp
     ),
     h6 = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         letterSpacing = 0.sp
     ),

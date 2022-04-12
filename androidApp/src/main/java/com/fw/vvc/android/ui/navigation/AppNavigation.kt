@@ -4,9 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fw.vvc.android.ui.screens.HomeScreen
-import com.fw.vvc.android.ui.screens.LoginScreen
-import com.fw.vvc.android.ui.screens.SplashScreen
+import com.fw.vvc.android.ui.screens.*
 
 @Composable
 fun AppNavigation(
@@ -24,6 +22,18 @@ fun AppNavigation(
         }
         composable(Destinations.Home.route) {
             HomeScreen(navController)
+        }
+        composable(Destinations.Detail.route) {
+            OpportunityDetailsScreen(navController)
+        }
+        composable(Destinations.ExpressInterest.route) {
+            ExpressInterestScreen(navController)
+        }
+        composable(Destinations.CreateOpportunity.route) {
+            CreateOpportunityScreen(navController)
+        }
+        composable(Destinations.VolunteersList.route) {
+            VolunteerListScreen(navController)
         }
     }
 }

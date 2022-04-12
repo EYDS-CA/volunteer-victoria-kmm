@@ -6,14 +6,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightThemeColors = lightColors(
-    primary = Red700,
-    primaryVariant = Red900,
+    primary = Primary,
+    primaryVariant = PrimaryVariant,
     onPrimary = Color.White,
-    secondary = Red700,
-    secondaryVariant = Red900,
-    onSecondary = Color.White,
+    secondary = Secondary,
+    secondaryVariant = Secondary,
+    onSecondary = Color.Black,
     error = Red800,
+    background = Background,
     onBackground = Color.Black,
+    surface = Surface,
 )
 
 @Composable
