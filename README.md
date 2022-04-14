@@ -1,5 +1,5 @@
 # Volunteer Victoria Canada App
-Developed in Kotlin Multiplatform Mobile with MVVM, Redux and Clean Architecture. Using SwiftUI and Jetpack Compose.
+Developed in Kotlin Multiplatform Mobile with MVVM and Clean Architecture. Using SwiftUI and Jetpack Compose.
 
 # Requeriments to Run
 
